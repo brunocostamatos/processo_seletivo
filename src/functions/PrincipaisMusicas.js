@@ -6,19 +6,13 @@ function PrincipaisMusicas(setlistaMusica){
    axios.get('https://cors-anywhere.herokuapp.com/https://api.deezer.com/chart/')
    .then((response) => {
        const listaMusicas = response.data.tracks.data
-       if(listaMusicas[0].title != listaMusicasStorage[0].title){
+       if(listaMusicas.length > 0){
          setlistaMusica(listaMusicas);
          localStorage.setItem('listaMusicas', JSON.stringify(listaMusicas))
        }
        else{
          setlistaMusica(listaMusicas)
        }
-   })
-   .catch(err=>{
-     if(err.response.status == 429){
-       setlistaMusica(listaMusicasStorage)
-     }
-     
    })
 }
 

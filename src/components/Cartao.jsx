@@ -182,33 +182,36 @@ export function Cartao(page) {
     }
   }
   else{
-    //console.log(resultadoPesquisa)
-    console.log("page.musica",page.musica)
-    console.log("page.musica.data", page.musica.data)
-    //console.log(page.musica.data)
-    if(page.musica.data./*data.*/length != 0){
-      const lista_temp = []
+    //console.log("page.musica",page.musica)
+    //console.log("page.musica.data", page.musica.data)
+    if(page.musica.data.data.length == 0){ 
+      document.getElementById("App-listagem").hidden = 'true'
+      return <div class="AvisoFavoritasVazia"> Nenhum resultado foi encontrado. 
+      <br></br>:(</div>
+    }
+    else{
+      document.getElementById("App-listagem").hidden = 'false'
+      return page.musica.data.data.map((pesquisa) => {
+        return <CartaoMusica musica={pesquisa} textButton={"Favoritar"} pagina={"view1"}/>;
+      });
+      /*const lista_temp = []   
       lista_temp.push(page.musica.data, page.musica.data.next)
       console.log("lista_temp",lista_temp)
       document.getElementById("App-listagem").hidden = 'true'
 
-      //const fetchMoreData = () => {SearchAPI(page.musica.data.next, setResultadoPesquisa)}
-      //Não consegui fazer com que esta função realizasse a busca do proximo conjunto de musicas ao descer
-      //o scroll, fazendo com que ocorra um excesso de entradas nesta função até que a resposta da requisição
-      //seja o bloqueio por parte do servidor da API
+      const fetchMoreData = () => {SearchAPI(page.musica.data.next, setResultadoPesquisa)}
+      
+      --Não consegui fazer com que esta função realizasse a busca do proximo conjunto de musicas ao descer
+      o scroll, fazendo com que ocorra um excesso de entradas nesta função até que a resposta da requisição
+      seja o bloqueio por parte do servidor da API--
+
       return(
-        <InfiniteScroll /*next={fetchMoreData(page.musica.next, setResultadoPesquisa)}*/ style={{display:"flex", flexDirection:"row", flexWrap:"wrap"}} dataLength={page.musica.data.total}>
+        <InfiniteScroll next={fetchMoreData(page.musica.next, setResultadoPesquisa)} style={{display:"flex", flexDirection:"row", flexWrap:"wrap"}} dataLength={page.musica.data.total}>
           {page.musica.data.data.map((pesquisa)=>{
             return <CartaoMusica musica={pesquisa} textButton={"Favoritar"} pagina={"view1"}/>
           })}
           </InfiniteScroll>
-      )
-      
-    }
-    else if(page.musica.data.length == 0){
-      document.getElementById("App-listagem").hidden = 'false'
-      return <div class="AvisoFavoritasVazia"> Nenhum resultado foi encontrado. 
-      <br></br>:(</div>
+      )*/
     }
     
   }

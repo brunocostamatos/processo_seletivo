@@ -2,7 +2,7 @@ import axios from "axios";
 //Função relacionada a realizar uma busca do que foi inserido no campo input de busca ou 
 // quando a view 1 for carregada, chama esta função passando o que seria o valor de pesquisa como 0
 function BarraBusca(variavel_pesquisa, setResultadoPesquisa){
-   const pesquisaTeste = ({
+   /*const pesquisaTeste = ({
       "data": [
         {
           "id": "1109731",
@@ -1007,7 +1007,7 @@ function BarraBusca(variavel_pesquisa, setResultadoPesquisa){
       ],
       "total": 300,
       "next": "https://api.deezer.com/search?q=eminem&index=25"
-    })
+    })*/
    const variavel_temp = variavel_pesquisa
   
    //setResultadoPesquisa(pesquisaTeste)
@@ -1015,7 +1015,7 @@ function BarraBusca(variavel_pesquisa, setResultadoPesquisa){
    axios.get('https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q='+variavel_pesquisa)
    .then((response) => {
        const retornoPesquisa = response
-       console.log(retornoPesquisa)
+       //console.log(retornoPesquisa)
        if(retornoPesquisa.data.total == 0){
           setResultadoPesquisa(retornoPesquisa)
        }
